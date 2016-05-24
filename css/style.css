@@ -1,0 +1,17 @@
+#camera-wrapper {
+    width: 640px;
+    height: 480px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+#overlay {
+    position: absolute;
+}
+
+#overlay img,
+#camera video {
+    max-width: 100%;
+    max-height: 100%;
+}
