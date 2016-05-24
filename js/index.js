@@ -33,6 +33,7 @@ function initialize() {
         data: {
           type: 'base64',
           name: 'almademujer.png',
+          album: 'ng2UfvfPHlqsUSR',
           title: 'almademujer',
           description: 'almademujer',
           image: finalImage.split(',')[1]
