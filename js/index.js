@@ -1,11 +1,9 @@
-jQuery(function(){
-  initialize();
-});
+initialize();
+
+var sayCheese;
 
 function initialize() {
-  var currentTemplate = "media/cartel.svg";
-  var sayCheese;
-
+  var currentTemplate = "media/cartel.png";
   sayCheese = new SayCheese('#camera', { snapshots: true });
 
   sayCheese.on('snapshot', function(snapshot) {
@@ -13,23 +11,19 @@ function initialize() {
       var ctx = snapshot.getContext('2d');
 
       var img = new Image();
-      img.src=currentTemplate;
+      img.src = currentTemplate;
 
       ctx.drawImage(img, 0,0);
 
-      snapshot = jQuery(snapshot);
-      snapshot.css('width',"1024")
-      snapshot.css('height',"768")
-
-      jQuery('body').append(snapshot);
+      document.getElementById('snapshot').src = snapshot.toDataURL("image/png");
     } catch(err) {
       throw err;
     }
   });
 
   sayCheese.start();
+}
 
-  jQuery("#snapshot-btn").on("click",function() {
-    sayCheese.takeSnapshot();
-  })
+function takeSnapshot() {
+  sayCheese.takeSnapshot();
 }
