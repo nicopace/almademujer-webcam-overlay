@@ -3,20 +3,27 @@ initialize();
 var sayCheese;
 
 function initialize() {
-  var currentTemplate = "media/cartel.png";
   sayCheese = new SayCheese('#camera', { snapshots: true });
 
   sayCheese.on('snapshot', function(snapshot) {
     try {
+      canvas.deactivateAll().renderAll();
+
       var ctx = snapshot.getContext('2d');
+      var img = document.getElementById('imageCanvas');
 
-      var img = new Image();
-      img.src = currentTemplate;
+      var hRatio = snapshot.width / img.width;
+      var vRatio = snapshot.height / img.height;
+      var ratio  = Math.min ( hRatio, vRatio );
 
-      ctx.drawImage(img, 0,0);
+      ctx.drawImage(img, 0, 0, img.width, img.height, 0,0,img.width*ratio, img.height*ratio);
 
-      document.getElementById('snapshot').src = snapshot.toDataURL("image/png");
+      document.getElementById('finalSnapshot').src = snapshot.toDataURL("image/png");
+      canvas.setActiveObject(canvasText);
+      canvasText.selectAll();
+      canvasText.enterEditing();
     } catch(err) {
+
       throw err;
     }
   });
